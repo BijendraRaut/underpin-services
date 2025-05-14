@@ -66,14 +66,3 @@ src/
 3. Use the filter buttons to view different task states
 4. Toggle between dark/light mode using the theme switcher
 
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you'd like to change.
-
-## License
-
-[MIT](https://choosealicense.com/licenses/mit/)
-
-```
-
-```
