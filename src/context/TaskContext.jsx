@@ -1,7 +1,20 @@
 // src/context/TaskContext.jsx
-import { createContext, useState, useCallback, useMemo } from "react";
+import {
+  createContext,
+  useState,
+  useCallback,
+  useMemo,
+  useContext,
+} from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 export const TaskContext = createContext();
+export const useTaskContext = () => {
+  const context = useContext(TaskContext);
+  if (!context) {
+    throw new Error("useTaskContext must be used within a TaskProvider");
+  }
+  return context;
+};
 
 export function TaskProvider({ children }) {
   const [tasks, setTasks] = useLocalStorage("tasks", []);
@@ -37,24 +50,15 @@ export function TaskProvider({ children }) {
     },
     [setTasks]
   );
-
+  // Update your TaskContext.jsx
   const onDragEnd = useCallback(
     (result) => {
-      const { destination, source } = result;
-
-      // If dropped outside the list or in the same position
-      if (
-        !destination ||
-        (destination.droppableId === source.droppableId &&
-          destination.index === source.index)
-      ) {
-        return;
-      }
+      if (!result.destination) return;
 
       setTasks((prev) => {
         const newTasks = [...prev];
-        const [removed] = newTasks.splice(source.index, 1);
-        newTasks.splice(destination.index, 0, removed);
+        const [removed] = newTasks.splice(result.source.index, 1);
+        newTasks.splice(result.destination.index, 0, removed);
         return newTasks;
       });
     },

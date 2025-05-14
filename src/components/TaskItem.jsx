@@ -7,13 +7,15 @@ const TaskItem = memo(({ task, index }) => {
   const { toggleTask, deleteTask, theme } = useContext(TaskContext);
 
   return (
-    <Draggable draggableId={task.id.toString()} index={index}>
-      {(provided) => (
+    <Draggable draggableId={`draggable-${task.id}`} index={index}>
+      {(provided, snapshot) => (
         <div
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          className={`task-item ${theme} ${task.completed ? "completed" : ""}`}
+          className={`task-item ${theme} ${task.completed ? "completed" : ""} ${
+            snapshot.isDragging ? "dragging" : ""
+          }`}
         >
           <div className="task-content">
             <input

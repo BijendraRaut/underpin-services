@@ -1,5 +1,6 @@
 // src/App.jsx
-import { TaskProvider } from "./context/TaskContext";
+import { TaskProvider, useTaskContext } from "./context/TaskContext";
+import { DragDropContext } from "react-beautiful-dnd";
 import AddTask from "./components/AddTask";
 import TaskList from "./components/TaskList";
 import FilterButtons from "./components/FilterButtons";
@@ -8,6 +9,8 @@ import "./styles/theme.css";
 import "./styles/animations.css";
 
 function App() {
+  const { onDragEnd } = useTaskContext();
+
   return (
     <TaskProvider>
       <div className="app-container">
@@ -16,7 +19,9 @@ function App() {
           <h1>Task Manager</h1>
           <AddTask />
           <FilterButtons />
-          <TaskList />
+          <DragDropContext onDragEnd={onDragEnd}>
+            <TaskList />
+          </DragDropContext>
         </div>
       </div>
     </TaskProvider>

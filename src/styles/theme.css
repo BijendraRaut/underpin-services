@@ -199,6 +199,7 @@
   .filter-buttons button.active {
     background-color: var(--primary);
     color: white;
+    border: none;
   }
   
   .clear-completed {
@@ -258,4 +259,69 @@
 
 .dark {
   --drag-over-bg: rgba(100, 108, 255, 0.2);
+}
+
+/* src/styles/theme.css */
+:root {
+  --primary: #646cff;
+  --primary-hover: #535bf2;
+  --text: #213547;
+  --background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+  --card-bg: #ffffff;
+  --border: #e0e0e0;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --completed: #888;
+  --button-bg: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+  --drag-over-bg: rgba(100, 108, 255, 0.1);
+}
+
+.dark {
+  --primary: #858bff;
+  --primary-hover: #747bff;
+  --text: rgba(255, 255, 255, 0.92);
+  --background: linear-gradient(135deg, #1a1a1a 0%, #242424 100%);
+  --card-bg: #2d2d2d;
+  --border: #404040;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --completed: #666;
+  --button-bg: linear-gradient(135deg, #2d2d2d 0%, #333333 100%);
+  --drag-over-bg: rgba(133, 139, 255, 0.2);
+}
+
+/* Update existing styles */
+.filter-buttons button {
+  border: 1px solid var(--border);
+  color: #000;
+}
+
+.clear-completed {
+  color: var(--primary);
+  font-weight: 500;
+}
+
+.task-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+}
+
+.task-text {
+  color: var(--text);
+}
+
+.empty-message {
+  color: var(--completed);
+}
+
+/* Add gradient to add button */
+.add-button {
+  background: linear-gradient(
+    135deg,
+    var(--primary) 0%,
+    var(--primary-hover) 100%
+  );
+}
+
+/* Improve checkbox visibility */
+.task-checkbox {
+  accent-color: var(--primary);
 }

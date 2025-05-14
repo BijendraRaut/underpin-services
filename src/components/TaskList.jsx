@@ -4,17 +4,20 @@ import { Droppable } from "react-beautiful-dnd";
 import { TaskContext } from "../context/TaskContext";
 import TaskItem from "./TaskItem";
 
-function TaskList() {
+function TaskList({ onDragEnd }) {
+  // Receive onDragEnd as a prop
   const { filteredTasks, clearCompleted, theme } = useContext(TaskContext);
 
   return (
     <div className={`task-list-container ${theme}`}>
       <Droppable droppableId="tasks">
-        {(provided) => (
+        {(provided, snapshot) => (
           <div
             ref={provided.innerRef}
             {...provided.droppableProps}
-            className="task-list"
+            className={`task-list ${
+              snapshot.isDraggingOver ? "dragging-over" : ""
+            }`}
           >
             {filteredTasks.length > 0 ? (
               filteredTasks.map((task, index) => (
